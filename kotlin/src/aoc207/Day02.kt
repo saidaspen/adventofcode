@@ -1,7 +1,7 @@
 package aoc207
 
 import util.getInput
-import util.numsOf
+import util.intsOf
 
 fun main() {
     val input = getInput("201702")
@@ -25,7 +25,7 @@ class Day02 {
 
     fun part2(input: String): String {
         val lines = input.lines()
-        val rows = lines.map { numsOf(it) }
+        val rows = lines.map { intsOf(it) }
         val checksum = rows.map { rowCheckSum(it) }.sum()
         return checksum.toString()
     }

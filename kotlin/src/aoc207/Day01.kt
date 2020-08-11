@@ -1,7 +1,7 @@
 package aoc207
 
 import util.getInput
-import util.intsOf
+import util.digitsOf
 
 fun main() {
     val input = getInput("201701")
@@ -12,7 +12,7 @@ fun main() {
 class Day01 {
     fun part1(input: String) : String {
         var sum = 0
-        val nums = intsOf(input)
+        val nums = digitsOf(input)
         for (i in nums.indices) {
             if (nums[i] == nums[(i + 1) % nums.size]) {
                 sum += nums[i]
@@ -23,7 +23,7 @@ class Day01 {
 
     fun part2(input: String) : String {
         var sum = 0
-        val nums = intsOf(input)
+        val nums = digitsOf(input)
         for (i in nums.indices) {
             if (nums[i] == nums[(i + nums.size/2) % nums.size]) {
                 sum += nums[i]
