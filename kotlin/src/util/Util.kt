@@ -3,7 +3,7 @@ package util
 import java.io.File
 
 fun getInput(name: String): String {
-    return File(ClassLoader.getSystemResource(name).file).readText()
+    return File(ClassLoader.getSystemResource(name).file).readText().trim()
 }
 
 fun digitsOf(input: String): List<Int> {

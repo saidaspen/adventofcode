@@ -2,6 +2,7 @@ package aoc207
 
 import util.getInput
 import util.intsOf
+import java.util.*
 
 fun main() {
     val input = getInput("201706")
