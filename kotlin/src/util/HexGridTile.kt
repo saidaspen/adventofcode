@@ -4,6 +4,23 @@ import util.HexGridTile.Dir.*
 import kotlin.math.abs
 
 @Suppress("MemberVisibilityCanBePrivate")
+/**
+ * This is a representation of a hexadecimal tile in a hexadecimal grid.
+ * The tiles look something like this:
+ *
+ *   \ n  /
+ * nw +--+ ne
+ *   /    \
+ * -+      +-
+ *   \    /
+ * sw +--+ se
+ *   / s  \
+ *
+ * They use a cubic coordinate system, as that is easier.
+ * More info can be found here:
+ * https://www.redblobgames.com/grids/hexagons/
+ *
+ */
 class HexGridTile(private val x: Int, private val y: Int, private val z: Int) {
 
     enum class Dir { N, S, NE, NW, SE, SW }
