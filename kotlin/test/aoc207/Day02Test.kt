@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 internal class Day02Test {
     @Test
     fun p1() {
-        //assertEquals("0", Day03().part1("1"))
         assertEquals("2", Day03().part1("23"))
         assertEquals("3", Day03().part1("20"))
         assertEquals("3", Day03().part1("16"))
@@ -18,10 +17,5 @@ internal class Day02Test {
         assertEquals("8", Day03().part1("81"))
         assertEquals("7", Day03().part1("66"))
         assertEquals("31", Day03().part1("1024"))
-    }
-
-    @Test
-    fun p2() {
-        assertEquals("", Day03().part2("289326"))
     }
 }

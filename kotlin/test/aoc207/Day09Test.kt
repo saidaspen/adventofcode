@@ -16,8 +16,4 @@ internal class Day09Test {
         assertEquals("3", Day09("{{<a!>},{<a!>},{<a!>},{<ab>}}").part1())
     }
 
-    @Test
-    fun p2() {
-        assertEquals("", Day09("").part2())
-    }
 }
