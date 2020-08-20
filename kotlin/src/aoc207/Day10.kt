@@ -26,7 +26,7 @@ class Day10(var ropeLen: Int) {
     }
 }
 
-private class KnotHasher(val lenSeq: List<Int>, len: Int) {
+public class KnotHasher(val lenSeq: List<Int>, len: Int) {
     private var currPos = 0
     private var skipSize = 0
     var rope = generateSequence(0) { it + 1 }.take(len).toMutableList()
