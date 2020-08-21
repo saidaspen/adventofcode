@@ -44,7 +44,7 @@ class Day18 {
         return sndFreq.toString()
     }
 
-    fun deref(op: String, reg: MutableMap<String, Long>): Long {
+    private fun deref(op: String, reg: MutableMap<String, Long>): Long {
         return if (op.toLongOrNull() == null) reg[op]!! else op.toLong()
     }
 
@@ -56,9 +56,7 @@ class Day18 {
         while (true) {
             a.run()
             b.run()
-            if (aToB.size == 0 && bToA.size == 0) {
-                break
-            }
+            if (aToB.size == 0 && bToA.size == 0) break
         }
         return b.numSent.toString()
     }
