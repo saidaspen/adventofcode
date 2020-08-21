@@ -9,11 +9,5 @@ internal class Day17Test {
     fun p1() {
         assertEquals(638, Day17().part1(3))
     }
-
-    @Test
-    fun p2() {
-        assertEquals(638, Day17().part2(3))
-    }
-
 }
 
