@@ -6,7 +6,6 @@ import util.getInputNoTrim
 fun main() {
     val input = getInputNoTrim("201719")
     println("Part 1: " + Day19().part1(input))
-    println("Part 2: " + Day19().part2(input))
 }
 
 // This is the ugliest code this side of the universe. But it got the job done....
@@ -87,11 +86,6 @@ class Day19 {
         return pos.second >= map.size || pos.second < 0 || pos.first >= map[pos.second].size || pos.first < 0
 
     }
-
-    fun part2(input: String): String {
-        TODO("Not yet implemented")
-    }
-
 }
 
 private operator fun Pair<Int, Int>.plus(that: Pair<Int, Int>): Pair<Int, Int> {
