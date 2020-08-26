@@ -2,6 +2,7 @@ package aoc207
 
 import util.getInput
 import util.getInputNoTrim
+import util.plus
 
 fun main() {
     val input = getInputNoTrim("201719")
@@ -86,8 +87,4 @@ class Day19 {
         return pos.second >= map.size || pos.second < 0 || pos.first >= map[pos.second].size || pos.first < 0
 
     }
-}
-
-private operator fun Pair<Int, Int>.plus(that: Pair<Int, Int>): Pair<Int, Int> {
-    return Pair(this.first + that.first, this.second + that.second)
 }

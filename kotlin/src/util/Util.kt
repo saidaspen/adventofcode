@@ -18,4 +18,6 @@ fun intsOf(input: String): MutableList<Int> {
     return "-?\\d+".toRegex(RegexOption.MULTILINE).findAll(input).map { it.value.toInt() }.toMutableList()
 }
 
-
+operator fun Pair<Int, Int>.plus(that: Pair<Int, Int>): Pair<Int, Int> {
+    return Pair(this.first + that.first, this.second + that.second)
+}
