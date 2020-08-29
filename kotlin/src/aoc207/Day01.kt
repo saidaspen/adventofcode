@@ -5,30 +5,12 @@ import util.digitsOf
 
 fun main() {
     val input = getInput("201701")
-    println(Day01().part1(input))
-    println(Day01().part2(input))
+    println(Day01(input).part1())
+    println(Day01(input).part2())
 }
 
-class Day01 {
-    fun part1(input: String) : String {
-        var sum = 0
-        val nums = digitsOf(input)
-        for (i in nums.indices) {
-            if (nums[i] == nums[(i + 1) % nums.size]) {
-                sum += nums[i]
-            }
-        }
-        return sum.toString()
-    }
-
-    fun part2(input: String) : String {
-        var sum = 0
-        val nums = digitsOf(input)
-        for (i in nums.indices) {
-            if (nums[i] == nums[(i + nums.size/2) % nums.size]) {
-                sum += nums[i]
-            }
-        }
-        return sum.toString()
-    }
+class Day01(input : String ) {
+    private val digits = digitsOf(input)
+    fun part1() : Int =  digits.filterIndexed{ i, e -> e == digits[(i + 1) % digits.size] }.sum()
+    fun part2() : Int = digits.filterIndexed{ i, e -> e == digits[(i + digits.size/2) % digits.size] }.sum()
 }
