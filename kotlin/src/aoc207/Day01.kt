@@ -11,6 +11,6 @@ fun main() {
 
 class Day01(input : String ) {
     private val digits = digitsOf(input)
-    fun part1() : Int =  digits.filterIndexed{ i, e -> e == digits[(i + 1) % digits.size] }.sum()
-    fun part2() : Int = digits.filterIndexed{ i, e -> e == digits[(i + digits.size/2) % digits.size] }.sum()
+    fun part1() =  digits.filterIndexed{ i, e -> e == digits[(i + 1) % digits.size] }.sum()
+    fun part2() = digits.filterIndexed{ i, e -> e == digits[(i + digits.size/2) % digits.size] }.sum()
 }

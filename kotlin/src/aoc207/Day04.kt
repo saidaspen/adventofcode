@@ -9,32 +9,9 @@ fun main() {
 }
 
 class Day04 {
-    fun part1(input: String): String {
-        return input.lines().map { isValidPasswordPart1(it) }.filter { it }.count().toString()
-    }
-
-    fun isValidPasswordPart1(line: String): Boolean {
-        val words = line.split(Regex("\\s"))
-        val set = HashSet<String>()
-        for (word in words) {
-            if (set.contains(word)) return false
-            else set.add(word)
-        }
-        return true
-    }
-
-    fun isValidPasswordPart2(line: String): Boolean {
-        val words = line.split(Regex("\\s"))
-        val set = HashSet<String>()
-        for (word in words) {
-            val letters = word.toCharArray().sorted().joinToString("")
-            if (set.contains(letters)) return false
-            else set.add(letters)
-        }
-        return true
-    }
-
-    fun part2(input: String): String {
-        return input.lines().map { isValidPasswordPart2(it) }.filter { it }.count().toString()
-    }
+    fun part1(input: String) = input.lines().filter { it.split(" ").distinct() == it.split(" ") }.count()
+    fun part2(input: String) = input.lines().filter {
+            val words = it.split(" ").map { w -> w.toCharArray().sorted().joinToString("") }
+            words.distinct() == words
+        }.count()
 }

@@ -2,21 +2,13 @@ package aoc207
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import util.getInput
 
 internal class Day04Test {
     @Test
-    fun p1() {
-        assertEquals(true, Day04().isValidPasswordPart1("aa bb cc dd ee"))
-        assertEquals(false, Day04().isValidPasswordPart1("aa bb cc dd aa"))
-        assertEquals(true, Day04().isValidPasswordPart1("aa bb cc dd aaa"))
-    }
-
-    @Test
-    fun p2() {
-        assertEquals(true, Day04().isValidPasswordPart2("abcde fghij"))
-        assertEquals(false, Day04().isValidPasswordPart2("abcde xyz ecdab"))
-        assertEquals(true, Day04().isValidPasswordPart2("a ab abc abd abf abj"))
-        assertEquals(true, Day04().isValidPasswordPart2("iiii oiii ooii oooi oooo"))
-        assertEquals(false, Day04().isValidPasswordPart2("oiii ioii iioi iiio"))
+    fun real() {
+        val app = Day04()
+        assertEquals(466, app.part1(getInput("201704")))
+        assertEquals(251, app.part2(getInput("201704")))
     }
 }

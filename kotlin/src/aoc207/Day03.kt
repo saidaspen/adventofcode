@@ -10,7 +10,7 @@ fun main() {
 }
 
 class Day03 {
-    fun part1(input: String): String {
+    fun part1(input: String): Int {
         val target = input.toInt()
         var sideLen = 1
         while (sideLen.toDouble().pow(2) < target) {
@@ -22,10 +22,10 @@ class Day03 {
         val midOnArm = (corner - (sideLen - 1) / 2) - ((sideLen - 1) * arm)
         val distanceToMid = (midOnArm - target).absoluteValue
         val distanceToLevel = ((sideLen - 1) / 2)
-        return (distanceToLevel + distanceToMid).toString()
+        return distanceToLevel + distanceToMid
     }
 
-    fun part2(input: String): String {
+    fun part2(input: String): Int {
         val target = input.toInt()
         val map = HashMap<Pair<Int, Int>, Int>()
         val directions = arrayOf(Pair(0,1), Pair(-1, 0), Pair(0, -1), Pair(1, 0))
@@ -37,7 +37,7 @@ class Day03 {
         while (true) {
             val value = valueOf(currPos, map)
             if (value > target)
-                return value.toString()
+                return value
             map[currPos] = value
             if (step == sideLen.toDouble().pow(2).toInt() - sideLen.minus(2).toDouble().pow(2).toInt()) {
                 currPos = Pair(currPos.first+1, currPos.second)

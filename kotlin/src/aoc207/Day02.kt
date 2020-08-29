@@ -5,30 +5,14 @@ import util.intsOf
 
 fun main() {
     val input = getInput("201702")
-    println(Day02().part1(input))
-    println("Part 2: " + Day02().part2(input))
+    println("Part 1: " + Day02(input).part1())
+    println("Part 2: " + Day02(input).part2())
 }
 
-class Day02 {
-    fun part1(input: String): String {
-        val lines = input.lines()
-        val rows = lines.map {
-            it.split("\\s".toRegex()).map { it.toInt() }.toList()
-        }
-        val checksum = rows.map {
-            val min = it.min() ?: 0
-            val max = it.max() ?: 0
-            max.minus(min)
-        }.sum()
-        return checksum.toString()
-    }
-
-    fun part2(input: String): String {
-        val lines = input.lines()
-        val rows = lines.map { intsOf(it) }
-        val checksum = rows.map { rowCheckSum(it) }.sum()
-        return checksum.toString()
-    }
+class Day02(input : String)  {
+    private val rows = input.lines().map { intsOf(it) }
+    fun part1() = rows.map { (it.max() ?: 0).minus(it.min() ?: 0) }.sum()
+    fun part2() = rows.map { rowCheckSum(it) }.sum()
 
     private fun rowCheckSum(it: List<Int>): Int {
         val tmp = it.sorted()
@@ -41,5 +25,4 @@ class Day02 {
         }
         throw RuntimeException("Something is wrong with input")
     }
-
 }
