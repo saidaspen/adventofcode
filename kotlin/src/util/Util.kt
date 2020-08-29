@@ -1,13 +1,11 @@
 package util
 
-import java.io.File
-
 fun getInput(name: String): String {
-    return File(ClassLoader.getSystemResource(name).file).readText().trim()
+    return java.io.File(ClassLoader.getSystemResource(name).file).readText().trim()
 }
 
 fun getInputNoTrim(name: String): String {
-    return File(ClassLoader.getSystemResource(name).file).readText()
+    return java.io.File(ClassLoader.getSystemResource(name).file).readText()
 }
 
 fun digitsOf(input: String): List<Int> {
@@ -21,3 +19,7 @@ fun intsOf(input: String): MutableList<Int> {
 operator fun Pair<Int, Int>.plus(that: Pair<Int, Int>): Pair<Int, Int> {
     return Pair(this.first + that.first, this.second + that.second)
 }
+
+typealias P<A, B> = Pair<A, B>
+
+

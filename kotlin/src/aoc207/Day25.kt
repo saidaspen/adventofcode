@@ -15,11 +15,9 @@ class Day25(var input: String) {
 
     fun part1(): Int {
         val parts = input.split("\n\n")
-        val beginState = lastWord(parts[0].lines()[0])
+        var state = lastWord(parts[0].lines()[0])
         val steps = intsOf(parts[0].lines()[1])[0]
-        println("Begin in : $beginState, checsum after: $steps steps")
         val stateMachine = buildStateMachine(parts)
-        var state = "A"
         var pos = 0
         val tape = mutableMapOf<Int, Int>().withDefault { 0 }
         for (i in 0 until steps) {

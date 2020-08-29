@@ -36,11 +36,6 @@ class HexGridTile(private val x: Int, private val y: Int, private val z: Int) {
         }
     }
 
-    fun move(dir: String): HexGridTile {
-        return move(valueOf(dir.toUpperCase()))
-    }
-
-    fun distance(b: HexGridTile): Int {
-        return (abs(x - b.x) + abs(y - b.y) + abs(z - b.z)) / 2
-    }
+    fun move(dir: String): HexGridTile = move(valueOf(dir.toUpperCase()))
+    fun distance(b: HexGridTile): Int = (abs(x - b.x) + abs(y - b.y) + abs(z - b.z)) / 2
 }
