@@ -4,17 +4,15 @@ import util.P
 import util.getInput
 
 fun main() {
-    println("Part 1: " + Day04.part1())
-    println("Part 1: " + Day04.part2())
+    println("Part 1: " + Day09.part1())
+    println("Part 1: " + Day09.part2())
 }
 
 data class Node(val name: String) {
     val next = mutableListOf<P<Node, Int>>()
 }
 
-data class Vert(val from: String, val to: String, val weight: Int)
-
-object Day04 {
+object Day09 {
     private val test = "London to Dublin = 464\n" +
             "London to Belfast = 518\n" +
             "Dublin to Belfast = 141"

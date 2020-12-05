@@ -42,27 +42,3 @@ private fun download(year: Int, day: Int): String {
 }
 
 fun getInputNoTrim(name: String) = File(ClassLoader.getSystemResource(name).file).readText()
-
-fun digits(input: String) = input.filter { it.isDigit() }.map { it.toString().toInt() }.toList()
-
-fun ints(input: String) = "-?\\d+".toRegex(RegexOption.MULTILINE).findAll(input).map { it.value.toInt() }.toMutableList()
-
-operator fun Pair<Int, Int>.plus(that: Pair<Int, Int>) = Pair(this.first + that.first, this.second + that.second)
-operator fun Pair<Int, Int>.minus(that: Pair<Int, Int>) = Pair(this.first - that.first, this.second - that.second)
-
-typealias P<A, B> = Pair<A, B>
-
-val P<Int, Any>.x: Int
-    get() { return this.first}
-val P<Any, Int>.y: Int
-    get() { return this.second}
-operator fun Int.times(inp: P<Int, Int>?): P<Int, Int> = P(inp!!.first * this, inp.second * this)
-
-fun freqMap(chars: String): Map<Char, Int> {
-    val freq: MutableMap<Char, Int> = HashMap()
-    for (c in chars) {
-        freq.putIfAbsent(c, 0)
-        freq[c] = freq[c]!! + 1
-    }
-    return freq
-}
