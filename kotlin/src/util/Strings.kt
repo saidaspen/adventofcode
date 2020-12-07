@@ -26,3 +26,11 @@ fun freqMap(chars: String): Map<Char, Int> {
     }
     return freq
 }
+
+fun String.tr(transSource: String, transTarget: String): String {
+    assert(transSource.length == transTarget.length)
+    val translation = transSource.toCharArray().mapIndexed { i, v -> P(v, transTarget[i]) }.toMap()
+    return tr(translation)
+}
+
+fun String.tr(translations: Map<Char, Char>) =  this.toCharArray().map { translations.getOrDefault(it, it) }.joinToString("")
