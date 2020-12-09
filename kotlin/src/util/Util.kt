@@ -5,10 +5,22 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.LocalDateTime
+import java.time.Month
 
 fun inputFromFile(name: String) = File(ClassLoader.getSystemResource(name).file).readText().trim()
 
 fun getInput(year: Int, day: Int): String {
+    return getInput(year, day, false)
+}
+
+fun getInput(year: Int, day: Int, block: Boolean): String {
+    val relTime = LocalDateTime.of(year, Month.DECEMBER, day, 6, 0)
+    while (block && LocalDateTime.now().isBefore(relTime)) {
+        Thread.sleep(1000L)
+    }
+    if (LocalDateTime.now().isBefore(relTime))
+        throw RuntimeException("Problem has not been released yet.")
     val inputsFolder = File(System.getProperty("user.home").plus(File.separator).plus(".aoc"))
     if (!inputsFolder.exists()) {
         inputsFolder.mkdir()
@@ -21,7 +33,11 @@ fun getInput(year: Int, day: Int): String {
     val fResource = inputsFolder.resolve(fileName)
     if (!fResource.exists()) {
         println("Downloading input for $year $day")
-        fResource.writeText(download(year, day))
+        val text = download(year, day)
+        if (text.contains("Please don't repeatedly")) {
+            throw RuntimeException("Too early to request input")
+        }
+        fResource.writeText(text)
     }
     return fResource.readText().trim()
 }
@@ -41,4 +57,4 @@ private fun download(year: Int, day: Int): String {
     }
 }
 
-fun getInputNoTrim(name: String) = File(ClassLoader.getSystemResource(name).file).readText()
+fun readFileInputNoTrim(name: String) = File(ClassLoader.getSystemResource(name).file).readText()

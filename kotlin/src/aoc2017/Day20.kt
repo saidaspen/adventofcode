@@ -1,12 +1,12 @@
 package aoc2017
 
-import util.getInputNoTrim
+import util.readFileInputNoTrim
 import util.ints
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun main() {
-    val input = getInputNoTrim("201720")
+    val input = readFileInputNoTrim("201720")
     println("Part 1: " + Day20().part1(input))
     println("Part 2: " + Day20().part2(input))
 }

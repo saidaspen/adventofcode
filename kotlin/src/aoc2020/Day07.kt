@@ -24,7 +24,7 @@ object Day07 {
     fun part2() = bagsContained("shiny gold") - 1
 
     private fun optionsFor(s: String): List<String> {
-        val options = map.filter { (_, v) -> v.any { it.second == s } }.map { it.key }.flatMap { optionsFor(it) }.toMutableList()
+        val options = map.filter { (_, v) -> v.any { it.second == s } }.flatMap { optionsFor(it.key) }.toMutableList()
         options.add(s)
         return options.distinct().toList()
     }

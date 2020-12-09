@@ -15,3 +15,10 @@ Anyway. Looking at some of the other participants solutions I realize that it is
 strings as sets and then doing set operation intersection on them.
 
 * Set operation intersect would have been great here.
+
+# 2020-09
+* It took me about a minute to read the puzzle input. It would have been quicker had I just briefly glanced at it, then check the input, and gotten directly to writing the code.
+* Im typing very slowly. There are also a lot of typing mistake. I should really correct that, since it costs me quiet a lot of time.
+* When removing stuff, I should really use the IntelliJ commands for +Selection instead of using shift and arrow keys
+* When creating a new variable, instead of typing the variable name and then going back to add var, I should just write `var variableName` directly.
+* I should try to use IntelliJ for automatically completing code.

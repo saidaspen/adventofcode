@@ -1,10 +1,10 @@
 package aoc2017
 
-import util.getInputNoTrim
+import util.readFileInputNoTrim
 import util.plus
 
 fun main() {
-    val input = getInputNoTrim("201719")
+    val input = readFileInputNoTrim("201719")
     println("Part 1: " + Day19().part1(input))
 }
 

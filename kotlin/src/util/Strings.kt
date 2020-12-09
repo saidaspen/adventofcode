@@ -34,3 +34,8 @@ fun String.tr(transSource: String, transTarget: String): String {
 }
 
 fun String.tr(translations: Map<Char, Char>) =  this.toCharArray().map { translations.getOrDefault(it, it) }.joinToString("")
+
+fun String.lastIndexOfBefore(s: String, idx: Int): Int {
+    val result =  this.length - this.reversed().indexOf(s, this.length - idx)-1
+    return if (result < this.length) result else -1
+}
