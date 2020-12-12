@@ -17,7 +17,7 @@ fun getInput(year: Int, day: Int): String {
 fun getInput(year: Int, day: Int, block: Boolean): String {
     val relTime = LocalDateTime.of(year, Month.DECEMBER, day, 6, 0)
     while (block && LocalDateTime.now().isBefore(relTime)) {
-        Thread.sleep(1000L)
+        Thread.sleep(1000)
     }
     if (LocalDateTime.now().isBefore(relTime))
         throw RuntimeException("Problem has not been released yet.")
