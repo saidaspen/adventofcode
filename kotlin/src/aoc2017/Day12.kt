@@ -14,7 +14,7 @@ class Day12(val input: String) {
     private fun getPipesMap(): MutableMap<Int, MutableList<Int>> {
         val tmpMap = mutableMapOf<Int, MutableList<Int>>()
         for (line in input.lines()) {
-            val pipeDef = ints(line)
+            val pipeDef = ints(line).toMutableList()
             for (i in pipeDef) {
                 for (j in pipeDef) {
                     if (!tmpMap.containsKey(j)) {

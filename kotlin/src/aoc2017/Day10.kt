@@ -15,7 +15,7 @@ class Day10(var ropeLen: Int) {
     fun part1(input: String): String {
         val rope = generateSequence(0) { it + 1 }.take(ropeLen).toMutableList()
         var currPos = 0
-        val lenSeq: MutableList<Int> = ints(input)
+        val lenSeq: MutableList<Int> = ints(input).toMutableList()
         for ((skipSize, n) in lenSeq.withIndex()) {
             val tmp = mutableListOf<Int>()
             val indexes = (0 until n).map { (it + currPos) % rope.size }.toList()

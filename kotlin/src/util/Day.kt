@@ -12,20 +12,22 @@ import java.time.temporal.ChronoUnit
 
 abstract class Day(private val year: Int, private val day: Int) {
 
-    var input = getInput(year, day)
+    var input = getInput(year, day, true)
 
     abstract fun part1(): Any
     abstract fun part2(): Any
 
     fun run() {
         val result1 = part1().toString()
+        if (result1.isEmpty()) return
         println("Part 1: $result1")
         println("---------------------------------")
         val complete1 = handleSubmit(result1, PART.ONE)
         println("---------------------------------")
         println("")
-        if (complete1) {
-            val result2 = part2().toString()
+        val result2 = part2().toString()
+        if (result2.isEmpty()) return
+        if (complete1 && result2.isNotEmpty()) {
             println("Part 2: $result2")
             println("---------------------------------")
             handleSubmit(result2, PART.TWO)
@@ -76,7 +78,6 @@ abstract class Day(private val year: Int, private val day: Int) {
             readLine()
         }
         val response = submit(part, value)
-        println(response)
         val (submission, earliestSubmit) = handleResponse(value, response)
         println("Submission $value for part $part is: ${submission.result}.")
         val until = LocalDateTime.now().until(earliestSubmit, ChronoUnit.SECONDS)

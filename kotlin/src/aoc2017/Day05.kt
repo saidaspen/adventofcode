@@ -11,7 +11,7 @@ fun main() {
 
 class Day05 {
     fun part1(input: String): Int {
-        val instructions = ints(input)
+        val instructions = ints(input).toMutableList()
         var pc = 0
         var steps = 0
         while (pc < instructions.size) {
@@ -24,7 +24,7 @@ class Day05 {
     }
 
     fun part2(input: String): Int {
-        val instrs = ints(input)
+        val instrs = ints(input).toMutableList()
         var pc = 0
         var steps = 0
         while (pc < instrs.size) {

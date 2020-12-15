@@ -2,7 +2,8 @@ package util
 
 fun digits(input: String) = input.filter { it.isDigit() }.map { it.toString().toInt() }.toList()
 
-fun ints(input: String) = "-?\\d+".toRegex(RegexOption.MULTILINE).findAll(input).map { it.value.toInt() }.toMutableList()
+fun ints(input: String) = "-?\\d+".toRegex(RegexOption.MULTILINE).findAll(input).map { it.value.toInt() }.toList()
+fun longs(input: String) = "-?\\d+".toRegex(RegexOption.MULTILINE).findAll(input).map { it.value.toLong() }.toList()
 
 fun consecutiveGroups(value: String): List<String> {
     val groups = mutableListOf<String>()

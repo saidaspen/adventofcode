@@ -12,7 +12,7 @@ fun main() {
 
 class Day06 {
     fun part1(input: String): Int {
-        val register = ints(input)
+        val register = ints(input).toMutableList()
         val visitedConfigs = HashSet<String>()
         while (true) {
             visitedConfigs.add(register.toString())
@@ -34,7 +34,7 @@ class Day06 {
     }
 
     fun part2(input: String): Int {
-        val register = ints(input)
+        val register = ints(input).toMutableList()
         val visitedConfigs = HashSet<String>()
         while (true) {
             visitedConfigs.add(register.toString())
