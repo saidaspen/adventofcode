@@ -3,15 +3,13 @@ package aoc2020
 import util.Day
 import util.ints
 
-fun main() {
-    Day15.run()
-}
+fun main() = Day15.run()
 
 object Day15 : Day(2020, 15) {
 
     override fun part1(): Any {
         var nums = ints(input).toMutableList()
-        while (nums.size < 2020) {
+        while (nums.size < 30000000) {
             val prev = nums.last()
             val listWoLast = nums.dropLast(1).toMutableList()
             val indexOf = listWoLast.lastIndexOf(prev)
