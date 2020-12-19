@@ -4,16 +4,15 @@ import util.Day
 import java.util.function.Function
 
 fun main() {
-//    println(Day18b.eval("1 + (4 * 5)".replace(" ", "")))
     Day18b.run()
 }
 
 object Day18b : Day(2020, 18) {
 
-    override fun part1() = input.lines().map { evalAddFirst(it, this::evalFlatInOrder) }.sum()
-    override fun part2() = input.lines().map { evalAddFirst(it, this::evalAddFirst) }.sum()
+    override fun part1() = input.lines().map { eval(it, this::evalFlatInOrder) }.sum()
+    override fun part2() = input.lines().map { eval(it, this::evalAddFirst) }.sum()
 
-    private fun evalAddFirst(expr: String, evaluator: Function<String, Long>): Long {
+    private fun eval(expr: String, evaluator: Function<String, Long>): Long {
         var tmp = expr.replace(" ", "")
         while (tmp.contains("(")) {
             for (i in tmp.indices) {
