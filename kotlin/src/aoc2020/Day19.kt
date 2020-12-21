@@ -9,17 +9,14 @@ fun main() {
 
 object Day19 : Day(2020, 19) {
 
-    private val rulesTxt = input.split("\n\n")[0]
     private val messages = input.split("\n\n")[1]
-    private val rules = rulesTxt.lines()
+    private val rules = input.split("\n\n")[0].lines()
         .map {
             val parts = it.split(":")
             parts[0].toInt() to parts[1].trim()
-        }.toMap().toSortedMap()
+        }.toMap().toMutableMap()
 
-    override fun part1(): Any {
-        return messages.lines().count { matches(it, listOf(0)) }
-    }
+    override fun part1() = messages.lines().count { matches(it, listOf(0)) }
 
     override fun part2(): Any {
         rules[8] = "42 | 42 8"
@@ -31,12 +28,9 @@ object Day19 : Day(2020, 19) {
         if (m.isEmpty() && rList.isEmpty()) return true
         if (m.isEmpty() || rList.isEmpty()) return false
         val r = rules[rList.first()]!!
-        if (r[0] == '"') {
-            return if (m.startsWith(r[1]))
-                matches(m.drop(1), rList.drop(1))
-            else false
-        }
-        return r.split("|").firstOrNull { matches(m, ints(it) + rList.drop(1)) } != null
+        return if (r[0] == '"' && m.startsWith(r[1])) matches(m.drop(1), rList.drop(1))
+        else if (r[0] == '"') false
+        else r.split("|").any { matches(m, ints(it) + rList.drop(1)) }
     }
 }
 

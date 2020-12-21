@@ -1,5 +1,7 @@
 package aoc2017
 
+import util.toBinary
+
 fun main() {
     println("Part 1: " + Day14().part1("nbysizxe"))
     println("Part 2: " + Day14().part2("nbysizxe"))
@@ -50,9 +52,5 @@ class Day14 {
         if (point.second > 0) list.add(Pair(point.first, point.second - 1))
         if (point.second < 127) list.add(Pair(point.first, point.second + 1))
         return list
-    }
-
-    private fun Int.toBinary(len: Int): String {
-        return String.format("%" + len + "s", this.toString(2)).replace(" ".toRegex(), "0")
     }
 }

@@ -46,6 +46,10 @@ fun multInv(a: Long, b: Long): Long {
     return x1
 }
 
+fun Int.toBinary(len: Int): String {
+    return String.format("%" + len + "s", this.toString(2)).replace(" ".toRegex(), "0")
+}
+
 fun chineseRemainder(n: LongArray, a: LongArray): Long {
     val prod = n.fold(1L) { acc, i -> acc * i }
     var sum = 0L
