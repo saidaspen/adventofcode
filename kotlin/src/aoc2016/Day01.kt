@@ -1,6 +1,5 @@
 package aoc2016
 
-import util.Dir.N
 import util.P
 import util.Turn.L
 import util.Turn.R
@@ -13,7 +12,7 @@ fun main() {
 }
 
 fun part2(input: String): Int {
-    val walker = Walker(Pair(0, 0), N)
+    val walker = Walker(Pair(0, 0), Walker.Dir.N)
     val visited = hashSetOf(walker.pos)
     val instructions = input.split(",")
             .map { it.trim() }
@@ -31,7 +30,7 @@ fun part2(input: String): Int {
 }
 
 fun findCode(input: String): Int {
-    val walker = Walker(Pair(0, 0), N)
+    val walker = Walker(Pair(0, 0), Walker.Dir.N)
     input.split(",")
             .map { it.trim() }
             .map { P(if (it.substring(0, 1) == "R") R else L, it.substring(1).toInt()) }

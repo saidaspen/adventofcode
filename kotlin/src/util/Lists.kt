@@ -23,3 +23,5 @@ fun <V> List<V>.permutations(): Sequence<List<V>> {
         }
     }
 }
+
+fun <E> List<E>.toArrayDeque() = ArrayDeque(this)
