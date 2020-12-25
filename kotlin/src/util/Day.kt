@@ -10,6 +10,27 @@ import java.time.Period
 import java.time.temporal.ChronoUnit
 
 
+const val ANSI_RESET = "\u001B[0m"
+const val ANSI_BLACK = "\u001B[30m"
+const val ANSI_BOLD = "\u001B[1m"
+const val ANSI_RED = "\u001B[31m"
+const val ANSI_GREEN = "\u001B[32m"
+const val ANSI_BRIGHT_GREEN = "\u001B[92m"
+const val ANSI_YELLOW = "\u001B[33m"
+const val ANSI_BLUE = "\u001B[34m"
+const val ANSI_PURPLE = "\u001B[35m"
+const val ANSI_CYAN = "\u001B[36m"
+const val ANSI_WHITE = "\u001B[37m"
+const val ANSI_BLACK_BACKGROUND = "\u001B[40m"
+const val ANSI_BRIGHT_BLACK_BACKGROUND = "\u001B[100m"
+const val ANSI_RED_BACKGROUND = "\u001B[41m"
+const val ANSI_GREEN_BACKGROUND = "\u001B[42m"
+const val ANSI_YELLOW_BACKGROUND = "\u001B[43m"
+const val ANSI_BLUE_BACKGROUND = "\u001B[44m"
+const val ANSI_PURPLE_BACKGROUND = "\u001B[45m"
+const val ANSI_CYAN_BACKGROUND = "\u001B[46m"
+const val ANSI_WHITE_BACKGROUND = "\u001B[47m"
+const val ANSI_BRIGHT_WHITE_BACKGROUND = "\u001B[107m"
 abstract class Day(private val year: Int, private val day: Int) {
 
     var input = getInput(year, day, true)
@@ -20,18 +41,13 @@ abstract class Day(private val year: Int, private val day: Int) {
     fun run() {
         val result1 = part1().toString()
         if (result1.isEmpty()) return
-        println("Part 1: $result1")
-        println("---------------------------------")
+        println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK Part 1: $ANSI_BOLD$result1 $ANSI_RESET")
         val complete1 = handleSubmit(result1, PART.ONE)
-        println("---------------------------------")
-        println("")
         val result2 = part2().toString()
         if (result2.isEmpty()) return
         if (complete1 && result2.isNotEmpty()) {
-            println("Part 2: $result2")
-            println("---------------------------------")
+            println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK Part 2: $ANSI_BOLD$result2 $ANSI_RESET")
             handleSubmit(result2, PART.TWO)
-            println("---------------------------------")
         }
     }
 
@@ -41,7 +57,7 @@ abstract class Day(private val year: Int, private val day: Int) {
         val prevRight = status.submissions.firstOrNull { it.result == Result.RIGHT }
         if (prevRight != null) {
             if (prevRight.value != value) {
-                println("Previous right value ${prevRight.value} != $value")
+                println("$ANSI_RED_BACKGROUND${ANSI_BLACK}Value ${ANSI_BOLD}${value}${ANSI_RESET}$ANSI_RED_BACKGROUND${ANSI_BLACK} NOT EQUAL TO previous right value: ${prevRight.value}$ANSI_RESET")
             }
             return true
         }
@@ -49,12 +65,12 @@ abstract class Day(private val year: Int, private val day: Int) {
             return true
 
         if (status.submissions.any { it.value == value }) {
-            println("Cannot submit. Already submitted value $value for $year-$day Part $part")
+            println("$ANSI_RED_BACKGROUND$ANSI_BLACK Cannot submit. Already submitted value $value for $year-$day Part $part$ANSI_RESET")
             return false
         }
         val range = status.getRange()
         if (range != null && value.toLongOrNull() == null) {
-            println("Cannot submit. $value is not a numeric value. Expected due to previous submissions. Answer will be in range: $range for $year-$day Part $part")
+            println("$ANSI_RED_BACKGROUND$ANSI_BLACK Cannot submit. $value is not a numeric value. Expected due to previous submissions. Answer will be in range: $range for $year-$day Part $part$ANSI_RESET")
             return false
         }
         if (range != null && !range.contains(value.toLong())) {
@@ -64,22 +80,26 @@ abstract class Day(private val year: Int, private val day: Int) {
                 range.last == Long.MAX_VALUE -> "greater than ${range.first}"
                 else -> "in range $range"
             }
-            println("Cannot submit $value is not in expected range: $rangeString for $year-$day Part $part")
+            println("$ANSI_RED_BACKGROUND$ANSI_BLACK Cannot submit $value is not in expected range: $rangeString for $year-$day Part $part $ANSI_RESET")
             return false
         }
         if (status.submitEarliest.isAfter(LocalDateTime.now())) {
-            println("Cannot submit value until ${status.submitEarliest}. Do you want to submit $value for $year-$day Part $part as soon as it is allowed?")
+            println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK Cannot submit value until ${status.submitEarliest}. Do you want to submit $value for $year-$day Part $part as soon as it is allowed? $ANSI_RESET")
             readLine()
             while (status.submitEarliest.isAfter(LocalDateTime.now())) {
                 Thread.sleep(500)
             }
         } else {
-            println("Submit $value for $year-$day Part $part?")
+            println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK Submit $value for $year-$day Part $part? $ANSI_RESET")
             readLine()
         }
         val response = submit(part, value)
         val (submission, earliestSubmit) = handleResponse(value, response)
-        println("Submission $value for part $part is: ${submission.result}.")
+        if (submission.result == Result.RIGHT){
+            println("Submission ${ANSI_BOLD}${value}${ANSI_RESET} for Part $part is: $ANSI_GREEN_BACKGROUND $ANSI_BOLD RIGHT ✅  $ANSI_RESET")
+        } else {
+            println("Submission ${ANSI_BOLD}${value}${ANSI_RESET} for Part $part is: $ANSI_RED_BACKGROUND $ANSI_BOLD WRONG ❌  $ANSI_RESET")
+        }
         val until = LocalDateTime.now().until(earliestSubmit, ChronoUnit.SECONDS)
         if (until > 0)
             println("Please wait $until seconds before trying again.")

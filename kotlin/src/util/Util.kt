@@ -7,6 +7,8 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.LocalDateTime
 import java.time.Month
+import java.time.temporal.ChronoUnit
+import java.util.concurrent.TimeUnit
 
 fun inputFromFile(name: String) = File(ClassLoader.getSystemResource(name).file).readText().trim()
 
@@ -14,10 +16,39 @@ fun getInput(year: Int, day: Int): String {
     return getInput(year, day, false)
 }
 
+fun String.runCommand(workingDir: File) {
+    ProcessBuilder(*split(" ").toTypedArray())
+        .directory(workingDir)
+        .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+        .redirectError(ProcessBuilder.Redirect.INHERIT)
+        .start()
+        .waitFor(60, TimeUnit.MINUTES)
+}
+
+
 fun getInput(year: Int, day: Int, block: Boolean): String {
+    println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK                             $ANSI_RESET")
+    println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK Advent of code $year day $day  $ANSI_RESET")
+    println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK                             $ANSI_RESET")
     val relTime = LocalDateTime.of(year, Month.DECEMBER, day, 6, 0)
+    if (LocalDateTime.now().isBefore(relTime)) {
+        println("⏸️ Waiting to download $year-$day")
+    }
+    var output: String? = null
     while (block && LocalDateTime.now().isBefore(relTime)) {
+        if (output != null) {
+            (1..output.length).forEach { _ -> print("\b") }
+        }
+        val secondsLeft = LocalDateTime.now().until(relTime, ChronoUnit.SECONDS)
+        output = "$secondsLeft seconds left."
+        if (secondsLeft < 100) {
+            output = ANSI_RED_BACKGROUND + ANSI_YELLOW + output + ANSI_RESET
+        }
+        print(output)
         Thread.sleep(1000)
+    }
+    if (output != null) {
+        (1..output.length).forEach { _ -> print("\b") }
     }
     if (LocalDateTime.now().isBefore(relTime))
         throw RuntimeException("Problem has not been released yet.")
@@ -32,7 +63,7 @@ fun getInput(year: Int, day: Int, block: Boolean): String {
     val fileName = "$year${"%02d".format(day)}"
     val fResource = inputsFolder.resolve(fileName)
     if (!fResource.exists()) {
-        println("Downloading input for $year $day")
+        println("$ANSI_BLUE_BACKGROUND$ANSI_BLACK  \uD83D\uDCE1️  Downloading input for $year $day  $ANSI_RESET")
         val text = download(year, day)
         if (text.contains("Please don't repeatedly")) {
             throw RuntimeException("Too early to request input")
@@ -49,9 +80,9 @@ private fun download(year: Int, day: Int): String {
     } else {
         val client = HttpClient.newBuilder().build()
         val request = HttpRequest.newBuilder()
-                .setHeader("Cookie", "session=$sessionCookie")
-                .uri(URI.create("https://adventofcode.com/${year}/day/${day}/input"))
-                .build()
+            .setHeader("Cookie", "session=$sessionCookie")
+            .uri(URI.create("https://adventofcode.com/${year}/day/${day}/input"))
+            .build()
         val response = client.send(request, HttpResponse.BodyHandlers.ofString())
         return response.body()
     }

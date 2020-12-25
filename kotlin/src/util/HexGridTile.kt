@@ -21,7 +21,7 @@ import kotlin.math.abs
  * https://www.redblobgames.com/grids/hexagons/
  *
  */
-class HexGridTile(private val x: Int, private val y: Int, private val z: Int) {
+data class HexGridTile(val x: Int, val y: Int, val z: Int) {
 
     enum class Dir { N, S, NE, NW, SE, SW }
 
@@ -38,4 +38,15 @@ class HexGridTile(private val x: Int, private val y: Int, private val z: Int) {
 
     fun move(dir: String) = move(valueOf(dir.toUpperCase()))
     fun distance(b: HexGridTile) = (abs(x - b.x) + abs(y - b.y) + abs(z - b.z)) / 2
+
+    fun adjacent(): List<HexGridTile> {
+        return listOf(
+            this.move(NE),
+            this.move(N),
+            this.move(SE),
+            this.move(SW),
+            this.move(S),
+            this.move(NW)
+        )
+    }
 }
